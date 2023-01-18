@@ -2,26 +2,32 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using ILogger = Serilog.ILogger;
 
-namespace Apps.Api.Controllers;
+namespace Books.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class AppsController : ControllerBase
+public class BooksController : ControllerBase
 {
-    private static readonly string[] apps = new[] { "Word", "Excel", "Powerpoint", "Visio" };
+    private static readonly string[] books = new[]
+    {
+        "War and Peace",
+        "The Brothers Karamazov",
+        "The Idiot",
+        "Crime and Punishment",
+    };
 
     private readonly ILogger _logger;
 
-    public AppsController()
+    public BooksController()
     {
-        _logger = Log.ForContext<AppsController>();
+        _logger = Log.ForContext<BooksController>();
     }
 
     [HttpGet(Name = "GetAll")]
     public IActionResult GetAll()
     {
-        _logger.Information("Getting all apps");
-        return Ok(apps);
+        _logger.Information("Getting all");
+        return Ok(books);
     }
 
     // GET api/values/5
@@ -43,6 +49,6 @@ public class AppsController : ControllerBase
     public IActionResult DeleteById(int id)
     {
         _logger.Information("Deleting App by Id {Id}", id);
-        return Ok(apps);
+        return Ok();
     }
 }
