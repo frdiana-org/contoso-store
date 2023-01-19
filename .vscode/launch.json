@@ -2,83 +2,44 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Apps API",
-      "type": "coreclr",
+      "name": "Docker Debug Apps",
+      "type": "docker",
+      "removeContainerAfterDebug": true,
       "request": "launch",
-      "preLaunchTask": "build apps.api",
-      "console": "externalTerminal",
-      "program": "${workspaceFolder}/src/services/apps/Apps.Api/bin/Debug/net7.0/Apps.Api.dll",
-      "args": [],
-      "cwd": "${workspaceFolder}/src/services/apps/Apps.Api",
-      "stopAtEntry": false,
-      "launchSettingsProfile": "https",
-      "serverReadyAction": {
-        "action": "openExternally",
-        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
-        "uriFormat": "%s/swagger"
-      },
-      "env": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "sourceFileMap": {
-        "/Views": "${workspaceFolder}/Views"
+      "preLaunchTask": "docker-run: debug - Apps.Api",
+      "netCore": {
+        "appProject": "${workspaceFolder}/src/services/apps/Apps.Api/Apps.Api.csproj"
+      }
+    },
+    {
+      "name": "Docker Debug Movies",
+      "type": "docker",
+      "request": "launch",
+      "removeContainerAfterDebug": true,
+      "preLaunchTask": "docker-run: debug - Movies.Api",
+      "netCore": {
+        "appProject": "${workspaceFolder}/src/services/movies/Movies.Api/Movies.Api.csproj"
       }
     },
 
     {
-      "name": "Launch Books API",
-      "type": "coreclr",
+      "name": "Docker Debug Books",
+      "type": "docker",
       "request": "launch",
-      "preLaunchTask": "build books.api",
-      "launchSettingsProfile": "https",
-      "console": "externalTerminal",
-      "program": "${workspaceFolder}/src/services/books/Books.Api/bin/Debug/net7.0/Books.Api.dll",
-      "args": [],
-      "cwd": "${workspaceFolder}/src/services/books/Books.Api",
-      "stopAtEntry": false,
-      "serverReadyAction": {
-        "action": "openExternally",
-        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
-        "uriFormat": "%s/swagger"
-      },
-      "env": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "sourceFileMap": {
-        "/Views": "${workspaceFolder}/Views"
-      }
-    },
-    {
-      "name": "Launch Movies API",
-      "type": "coreclr",
-      "launchSettingsProfile": "https",
-      "console": "externalTerminal",
-      "request": "launch",
-      "preLaunchTask": "build movies.api",
-      "program": "${workspaceFolder}/src/services/movies/Movies.Api/bin/Debug/net7.0/Movies.Api.dll",
-      "args": [],
-      "cwd": "${workspaceFolder}/src/services/movies/Movies.Api",
-      "stopAtEntry": false,
-      "serverReadyAction": {
-        "action": "openExternally",
-        "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
-        "uriFormat": "%s/swagger"
-      },
-      "env": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "sourceFileMap": {
-        "/Views": "${workspaceFolder}/Views"
+      "removeContainerAfterDebug": true,
+      "preLaunchTask": "docker-run: debug - Books.Api",
+      "netCore": {
+        "appProject": "${workspaceFolder}/src/services/books/Books.Api/Books.Api.csproj"
       }
     }
   ],
   "compounds": [
     {
-      "name": "Run All",
+      "name": "Docker Debug All",
       "configurations": [
-        "Launch Apps API",
-        "Launch Books API",
-        "Launch Movies API"
+        "Docker Debug Apps",
+        "Docker Debug Movies",
+        "Docker Debug Books"
       ]
     }
   ]
