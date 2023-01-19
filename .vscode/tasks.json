@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "build apps.api",
+      "label": "build - Apps.Api",
       "command": "dotnet",
       "type": "process",
       "args": [
@@ -14,67 +14,34 @@
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "publish apps.api",
-      "command": "dotnet",
-      "type": "process",
-      "args": [
-        "publish",
-        "${workspaceFolder}/src/services/apps/Apps.Api/Apps.Api.csproj",
-        "/property:GenerateFullPaths=true",
-        "/consoleloggerparameters:NoSummary"
-      ],
-      "problemMatcher": "$msCompile"
+      "type": "docker-build",
+      "label": "docker-build: debug - Apps.Api",
+      "dependsOn": ["build - Apps.Api"],
+      "dockerBuild": {
+        "tag": "contosostore-apps:dev",
+        "target": "base",
+        "dockerfile": "${workspaceFolder}/src/services/apps/Apps.Api/Dockerfile",
+        "context": "${workspaceFolder}",
+        "pull": true
+      },
+      "netCore": {
+        "appProject": "${workspaceFolder}/src/services/apps/Apps.Api/Apps.Api.csproj"
+      }
     },
     {
-      "label": "watch apps.api",
-      "command": "dotnet",
-      "type": "process",
-      "args": [
-        "watch",
-        "run",
-        "--project",
-        "${workspaceFolder}/src/services/apps/Apps.Api/Apps.Api.csproj"
-      ],
-      "problemMatcher": "$msCompile"
+      "type": "docker-run",
+      "label": "docker-run: debug - Apps.Api",
+      "dependsOn": ["docker-build: debug - Apps.Api"],
+      "dockerRun": {
+        "containerName": "apps"
+      },
+      "netCore": {
+        "appProject": "${workspaceFolder}/src/services/apps/Apps.Api/Apps.Api.csproj",
+        "enableDebugging": true
+      }
     },
     {
-      "label": "build books.api",
-      "command": "dotnet",
-      "type": "process",
-      "args": [
-        "build",
-        "${workspaceFolder}/src/services/books/Books.Api/Books.Api.csproj",
-        "/property:GenerateFullPaths=true",
-        "/consoleloggerparameters:NoSummary"
-      ],
-      "problemMatcher": "$msCompile"
-    },
-    {
-      "label": "publish build books.api",
-      "command": "dotnet",
-      "type": "process",
-      "args": [
-        "publish",
-        "${workspaceFolder}/src/services/books/Books.Api/Books.Api.csproj",
-        "/property:GenerateFullPaths=true",
-        "/consoleloggerparameters:NoSummary"
-      ],
-      "problemMatcher": "$msCompile"
-    },
-    {
-      "label": "watch build books.api",
-      "command": "dotnet",
-      "type": "process",
-      "args": [
-        "watch",
-        "run",
-        "--project",
-        "${workspaceFolder}/src/services/books/Books.Api/Books.Api.csproj"
-      ],
-      "problemMatcher": "$msCompile"
-    },
-    {
-      "label": "build movies.api",
+      "label": "build - Movies.Api",
       "command": "dotnet",
       "type": "process",
       "args": [
@@ -86,28 +53,70 @@
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "publish movies.api",
+      "type": "docker-build",
+      "label": "docker-build: debug - Movies.Api",
+      "dependsOn": ["build - Movies.Api"],
+      "dockerBuild": {
+        "tag": "contosostore-movies:dev",
+        "target": "base",
+        "dockerfile": "${workspaceFolder}/src/services/movies/Movies.Api/Dockerfile",
+        "context": "${workspaceFolder}",
+        "pull": true
+      },
+      "netCore": {
+        "appProject": "${workspaceFolder}/src/services/movies/Movies.Api/Movies.Api.csproj"
+      }
+    },
+    {
+      "type": "docker-run",
+      "label": "docker-run: debug - Movies.Api",
+      "dependsOn": ["docker-build: debug - Movies.Api"],
+      "dockerRun": {
+        "containerName": "movies"
+      },
+      "netCore": {
+        "appProject": "${workspaceFolder}/src/services/movies/Movies.Api/Movies.Api.csproj",
+        "enableDebugging": true
+      }
+    },
+    {
+      "label": "build - Books.Api",
       "command": "dotnet",
       "type": "process",
       "args": [
-        "publish",
-        "${workspaceFolder}/src/services/movies/Movies.Api/Movies.Api.csproj",
+        "build",
+        "${workspaceFolder}/src/services/books/Books.Api/Books.Api.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "watch movies.api",
-      "command": "dotnet",
-      "type": "process",
-      "args": [
-        "watch",
-        "run",
-        "--project",
-        "${workspaceFolder}/src/services/movies/Movies.Api/Movies.Api.csproj"
-      ],
-      "problemMatcher": "$msCompile"
+      "type": "docker-build",
+      "label": "docker-build: debug - Books.Api",
+      "dependsOn": ["build - Books.Api"],
+      "dockerBuild": {
+        "tag": "contosostore-books:dev",
+        "target": "base",
+        "dockerfile": "${workspaceFolder}/src/services/books/Books.Api/Dockerfile",
+        "context": "${workspaceFolder}",
+        "pull": true
+      },
+      "netCore": {
+        "appProject": "${workspaceFolder}/src/services/books/Books.Api/Books.Api.csproj"
+      }
+    },
+    {
+      "type": "docker-run",
+      "label": "docker-run: debug - Books.Api",
+      "dependsOn": ["docker-build: debug - Books.Api"],
+      "dockerRun": {
+        "containerName": "books"
+      },
+      "netCore": {
+        "appProject": "${workspaceFolder}/src/services/books/Books.Api/Books.Api.csproj",
+        "enableDebugging": true
+      }
     }
   ]
 }
