@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 defaults:
   run:
-    working-directory: ./src/services/apps/Apps.Api
+    working-directory: /src/services/apps/Apps.Api
 
 jobs:
   build-container-image:
