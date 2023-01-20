@@ -11,10 +11,10 @@ USER appuser
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["src/services/apps/Apps.Api/Apps.Api.csproj", "services/apps/Apps.Api/"]
+COPY ["src/services/apps/Apps.Api/Apps.Api.csproj", "src/services/apps/Apps.Api/"]
 RUN dotnet restore "src/services/apps/Apps.Api/Apps.Api.csproj"
 COPY . .
-WORKDIR "/src/services/apps/Apps.Api"
+WORKDIR "/src/src/services/apps/Apps.Api"
 RUN dotnet build "Apps.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
