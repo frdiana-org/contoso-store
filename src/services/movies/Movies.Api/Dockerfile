@@ -14,7 +14,7 @@ WORKDIR /src
 COPY ["src/services/movies/Movies.Api/Movies.Api.csproj", "src/services/movies/Movies.Api/"]
 RUN dotnet restore "src/services/movies/Movies.Api/Movies.Api.csproj"
 COPY . .
-WORKDIR "/src/src/services/movies/Movies.Api"
+WORKDIR "/src/services/movies/Movies.Api"
 RUN dotnet build "Movies.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish

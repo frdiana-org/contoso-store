@@ -14,7 +14,7 @@ WORKDIR /src
 COPY ["src/services/books/Books.Api/Books.Api.csproj", "src/services/books/Books.Api/"]
 RUN dotnet restore "src/services/books/Books.Api/Books.Api.csproj"
 COPY . .
-WORKDIR "/src/src/services/books/Books.Api"
+WORKDIR "/src/services/books/Books.Api"
 RUN dotnet build "Books.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
