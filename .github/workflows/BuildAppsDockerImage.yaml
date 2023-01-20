@@ -6,10 +6,6 @@ on:
       - 'src/services/apps*'
   workflow_dispatch:
 
-defaults:
-  run:
-    working-directory: ./src/services/apps
-
 jobs:
   build-container-image:
     runs-on: ubuntu-latest
