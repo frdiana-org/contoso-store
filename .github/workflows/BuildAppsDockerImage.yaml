@@ -25,5 +25,5 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/contosostore-apps:${{ github.sha }} -f ./src/services/apps/Apps.Api
+        docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/contosostore-apps:${{ github.sha }} -f ./src/services/apps/Apps.Api/Dockerfile
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/contosostore-apps:${{ github.sha }}
