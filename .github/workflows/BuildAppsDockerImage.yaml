@@ -6,10 +6,6 @@ on:
       - 'src/services/apps/Apps.Api/*'
   workflow_dispatch:
 
-defaults:
-  run:
-    working-directory: ./src/services/apps/Apps.Api
-
 jobs:
   build-container-image:
     runs-on: ubuntu-latest
@@ -29,5 +25,5 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/contosostore-apps:${{ github.sha }}
+        docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/contosostore-apps:${{ github.sha }} -f ./src/services/apps/Apps.Api
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/contosostore-apps:${{ github.sha }}
