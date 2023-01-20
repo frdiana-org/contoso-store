@@ -3,9 +3,13 @@ name: Build Apps Docker Image
 on:
   push:
     paths:
-      - 'src/services/apps*'
+      - 'src/services/apps/Apps.Api/*'
   workflow_dispatch:
-  
+
+defaults:
+  run:
+    working-directory: ./src/services/apps/Apps.Api
+
 jobs:
   build-container-image:
     runs-on: ubuntu-latest
