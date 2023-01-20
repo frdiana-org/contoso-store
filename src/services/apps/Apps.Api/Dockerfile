@@ -13,8 +13,6 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["src/services/apps/Apps.Api/Apps.Api.csproj", "src/apps/"]
 RUN dotnet restore "src/apps/Apps.Api.csproj"
-COPY . src/apps/
-WORKDIR "/src/apps/"
 RUN dotnet build "Apps.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
