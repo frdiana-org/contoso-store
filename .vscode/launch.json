@@ -21,7 +21,6 @@
         "appProject": "${workspaceFolder}/src/services/movies/Movies.Api/Movies.Api.csproj"
       }
     },
-
     {
       "name": "Docker Debug Books",
       "type": "docker",
@@ -31,15 +30,35 @@
       "netCore": {
         "appProject": "${workspaceFolder}/src/services/books/Books.Api/Books.Api.csproj"
       }
+    },
+    {
+      "name": "Docker Debug contoso-store-spa",
+      "type": "docker",
+      "request": "launch",
+      "preLaunchTask": "docker-run: debug - contoso-store-spa",
+      "platform": "node",
+      "node": {
+        "package": "${workspaceFolder}/src/clients/contoso-store-spa/package.json",
+        "localRoot": "${workspaceFolder}/src/clients/contoso-store-spa"
+      }
     }
   ],
   "compounds": [
     {
-      "name": "Docker Debug All",
+      "name": "Debug All apis",
       "configurations": [
         "Docker Debug Apps",
         "Docker Debug Movies",
         "Docker Debug Books"
+      ]
+    },
+    {
+      "name": "Debug All apis + contoso-store-spa",
+      "configurations": [
+        "Docker Debug Apps",
+        "Docker Debug Movies",
+        "Docker Debug Books",
+        "Docker Debug contoso-store-spa"
       ]
     }
   ]
