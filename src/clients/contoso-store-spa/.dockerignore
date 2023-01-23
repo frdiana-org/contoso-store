@@ -11,7 +11,6 @@
 **/*.*proj.user
 **/*.dbmdl
 **/*.jfm
-**/bin
 **/charts
 **/docker-compose*
 **/compose*
@@ -21,7 +20,5 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
-**/node_modules
-**/build
 LICENSE
 README.md
