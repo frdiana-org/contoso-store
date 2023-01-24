@@ -9,16 +9,18 @@ param location string = resourceGroup().location
 @description('Provide a tier of your Azure Container Registry.')
 param acrSku string = 'Basic'
 
-resource acrResource 'Microsoft.ContainerRegistry/registries@2021-06-01-preview' = {
+resource acrResource 'Microsoft.ContainerRegistry/registries@2022-02-01-preview' = {
   name: acrName
   location: location
   sku: {
     name: acrSku
   }
   properties: {
-    adminUserEnabled: false
+    adminUserEnabled: true
   }
 }
 
 @description('Output the login server property for later use')
 output loginServer string = acrResource.properties.loginServer
+// TODO: This is a temporary workaround
+output loginPassword string = acrResource.listCredentials().passwords[0].value
